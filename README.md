@@ -16,7 +16,7 @@ Automatically apply traceback styling akin to Jetbrains Traceback highlighting, 
 import charmed_traceback
 charmed_traceback.add_hook()
 ```
-# If want to retain the charmed style even when stderr is being piped, tack on an always=True argument:
+### If want to retain the charmed style even when stderr is being piped, tack on an always=True argument:
 ```python
 import charmed_traceback
 charmed_traceback.add_hook(always=True)
