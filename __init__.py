@@ -1,4 +1,4 @@
-from .colored_traceback import add_hook, Charmify
+from .charmed_traceback import add_hook, Charmify
 
 """
 # Example Usage

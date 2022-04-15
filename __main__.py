@@ -1,8 +1,8 @@
 import os
 import sys
-import colored_traceback
+import charmed_traceback
 
-colored_traceback.add_hook()
+charmed_traceback.add_hook()
 
 # Check that a script was passed in.
 if len(sys.argv) <= 1:

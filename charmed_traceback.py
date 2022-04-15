@@ -1,10 +1,10 @@
 import sys
 import re
-from typing import Iterable, AnyStr
+from typing import Iterable, AnyStr, List
 
 
 class Colors:
-    def __init__(self):
+    def __init__(self) -> None:
         self.pref: str = "\033["
         self.reset = f"{self.pref}0m"
 
@@ -22,7 +22,7 @@ class Charmify(object):
         self.stream.write(self.restructure_colored_segments(tb_text))
 
     @staticmethod
-    def split_tokenize(delimiters: Iterable, string: AnyStr) -> list[AnyStr]:
+    def split_tokenize(delimiters: Iterable, string: AnyStr) -> List[AnyStr]:
         """
         Tokenizes between File references and Traceback Descriptions,
         later Half of the function performs a check disregaurding any
@@ -30,11 +30,11 @@ class Charmify(object):
         and ensures full validity of File references.
         :param delimiters: Iterable - pre-detected File References.
         :param string: AnyStr - full Traceback value.
-        :return: list[AnyStr] - Tokenized
+        :return: List[AnyStr] - Tokenized
         """
         import re
         regex_pattern: str = '(' + '|'.join(map(re.escape, delimiters)) + ')'
-        split_keeping_delimiter_list: list[AnyStr] = re.split(pattern=regex_pattern, string=string, maxsplit=0)
+        split_keeping_delimiter_list: List[AnyStr] = re.split(pattern=regex_pattern, string=string, maxsplit=0)
         for index, s in enumerate(split_keeping_delimiter_list):
 
             if s[0:5] == r'File ':
@@ -72,7 +72,7 @@ class Charmify(object):
 
 def add_hook(always: bool = False ) -> None:
     """
-    Apply hook to tracebacks, applying Jetbrains style Traceback Highlighting,
+    Automatically apply traceback styling akin to Jetbrains Traceback highlighting,
     providing much easier debugging and log searching.
     :param always: bool
     :return: None

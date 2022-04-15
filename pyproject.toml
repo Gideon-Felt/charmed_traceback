@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "charmed-traceback"
+version = "0.1.0"
+description ="Automatically apply traceback styling akin to Jetbrains Traceback highlighting, providing much easier debugging and log searching, as-well as feel more at home away from PyCharm"
+authors = ["Gideon Felt <gideonfelt.dev@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/Gideon-Felt/charmed_traceback"
+repository = "https://github.com/Gideon-Felt/charmed_traceback"
+packages = [
+    { include = "charmed_traceback" },
+    { include = "charmed_traceback/auto" },
+    { include = "charmed_traceback/always" },
+]
+
+
+[tool.poetry.dependencies]
+python = ">=3.7.0,<4.0"
+
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+setuptools = "60.5.0"
+
+
+[build-system]
+requires = ["poetry-core==1.1.12"]
+build-backend = "poetry.core.masonry.api"
