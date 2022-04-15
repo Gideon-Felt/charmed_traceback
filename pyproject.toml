@@ -8,9 +8,9 @@ readme = "README.md"
 homepage = "https://github.com/Gideon-Felt/charmed_traceback"
 repository = "https://github.com/Gideon-Felt/charmed_traceback"
 packages = [
-    { include = "charmed_traceback" },
-    { include = "charmed_traceback/auto" },
-    { include = "charmed_traceback/always" },
+    { include = "charmed_traceback.py" },
+    { include = "auto/" },
+    { include = "always/" },
 ]
 
 
