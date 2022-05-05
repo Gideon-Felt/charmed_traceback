@@ -4,8 +4,10 @@ Automatically apply traceback styling akin to Jetbrains Traceback highlighting, 
 
 
 # Installation
+### Through pip:<br>
+`pip install charmed-traceback`
 ### Build with poetry:<br>
-`pip | pipx install Poetry`<br>
+`pip install Poetry`<br>
 `poetry build`
 
 # Usage
@@ -33,11 +35,10 @@ import charmed_traceback.always
 ```python
 import contextlib
 
-def call_dev_charm_colorize_traceback() -> None:
+def dev_charm_traceback_handler() -> None:
     with contextlib.suppress(ImportError):
         import charmed_traceback.auto
-        charmed_traceback.add_hook()
 
 # This call can be left in a project regaurdless of the presence of Charmed Traceback package.
-call_dev_charm_colorize_traceback()
+dev_charm_traceback_handler()
 ```

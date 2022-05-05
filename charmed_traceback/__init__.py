@@ -7,12 +7,11 @@ from .charmed_traceback import add_hook, Charmify
 
 import contextlib
 
-def call_dev_charm_colorize_traceback() -> None:
+def dev_charm_traceback_handler() -> None:
     with contextlib.suppress(ImportError):
-        import colored_traceback.auto
-        colored_traceback.add_hook()
+        import charmed_traceback.auto
 
-call_dev_charm_colorize_traceback()
+dev_charm_traceback_handler()
 
 def test_to_failure():
     while True:

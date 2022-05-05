@@ -11,7 +11,7 @@ class Colors:
         self.red = "31m"
         self.blue = "34m"
 
-    def color_string(self, text: AnyStr, color: str = "white", is_bold: bool = False):
+    def color_string(self, text: str, color: str = "white", is_bold: bool = False):
         return f'{self.pref}{1 if is_bold else 0};{getattr(self, color)}' + text + self.reset
 
 
@@ -33,8 +33,14 @@ class Charmify(object):
         :return: List[AnyStr] - Tokenized
         """
         import re
-        regex_pattern: str = '(' + '|'.join(map(re.escape, delimiters)) + ')'
-        split_keeping_delimiter_list: List[AnyStr] = re.split(pattern=regex_pattern, string=string, maxsplit=0)
+        regex_string: str = '(' + '|'.join(map(re.escape, delimiters)) + ')'
+        regex_pattern: re.Pattern = re.compile(regex_string)
+        
+        split_keeping_delimiter_list: List[AnyStr] = re.split(
+            pattern=regex_pattern,
+            string=string,
+            maxsplit=0
+        )
         for index, s in enumerate(split_keeping_delimiter_list):
 
             if s[0:5] == r'File ':
@@ -42,14 +48,14 @@ class Charmify(object):
                 split_keeping_delimiter_list[index] = s[5:]
         return split_keeping_delimiter_list
 
-    def restructure_colored_segments(self, string: AnyStr) -> str:
+    def restructure_colored_segments(self, string: str) -> str:
         """
         Applies tokenization, then color tagging.
-        :param string: : AnyStr - full Traceback value.
-        :return: AnyStr - ANSI Compatible string individually colored by token.
+        :param string: str - full Traceback value.
+        :return: str - ANSI Compatible string individually colored by token.
         """
         color_tool = Colors()
-        quoted_sub_strings = re.findall(r'"(.+?)"', string)
+        quoted_sub_strings: List[re.Match] = re.findall(r'"(.+?)"', string)
         split_string = self.split_tokenize(
             delimiters=list(map(lambda i: f'File "{i}"', quoted_sub_strings)), string=string)
         return "".join(
@@ -64,7 +70,7 @@ class Charmify(object):
     @property
     def stream(self):
         try:
-            import colorama
+            import colorama # type: ignore
             return colorama.AnsiToWin32(sys.stderr)
         except ImportError:
             return sys.stderr
